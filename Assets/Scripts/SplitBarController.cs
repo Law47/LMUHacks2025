@@ -63,7 +63,6 @@ public class SplitBarController : MonoBehaviour {
             SplitBar.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, rotTargetSplitBar));
         } else {
             SplitBar.transform.rotation = Quaternion.Euler(SplitBar.transform.rotation.eulerAngles + new Vector3(0f, 0f, getAngleDistance(angularClamp2(rotTargetSplitBar), angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z)) < 0 ? -SplitBarRotationSpeed : SplitBarRotationSpeed));
-            Debug.Log($"Actual: {rbSplitBar.angularVelocity},   Expected: {(getAngleDistance(angularClamp2(rotTargetSplitBar), angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z)) < 0 ? SplitBarRotationSpeed : -SplitBarRotationSpeed)}");
         }
         float scaleTargetDeviation = Mathf.Abs(scaleTargetSplitBar - SplitBar.transform.localScale.y);
         if (scaleTargetDeviation <= ScaleAutoMergeDistance) {
@@ -71,8 +70,6 @@ public class SplitBarController : MonoBehaviour {
         } else {
             rbSplitBar.transform.localScale = new Vector3(SplitBar.transform.localScale.x, rbSplitBar.transform.localScale.y * (scaleTargetSplitBar < rbSplitBar.transform.localScale.y ? 1 - SplitBarScaleSpeed : 1 + SplitBarScaleSpeed), SplitBar.transform.localScale.z);
         }
-        Debug.Log($"Angle: {rbSplitBar.transform.rotation.eulerAngles.z}   ,Clamped Angle: {angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z)},   Target Angle: {rotTargetSplitBar}");
-        Debug.Log($"Deviations: [{posTargetDeviation}, {rotTargetDeviation}, {scaleTargetDeviation}]");
     }
 
     public void SetSplitBarMoveSpeed(float a) { SplitBarMoveSpeed = a; }
