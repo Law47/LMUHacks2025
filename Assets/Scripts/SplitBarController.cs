@@ -17,6 +17,8 @@ public class SplitBarController : MonoBehaviour {
     private float rotTargetSplitBar;
     private float scaleTargetSplitBar;
     
+    private float rotateNonStop;
+    
     Vector2 toVector2(Vector3 a) {
         return new Vector2(a.x, a.y);
     }
@@ -50,6 +52,7 @@ public class SplitBarController : MonoBehaviour {
         posTargetSplitBar = toVector2(SplitBar.transform.position);
         rotTargetSplitBar = SplitBar.transform.rotation.eulerAngles.z;
         scaleTargetSplitBar = SplitBar.transform.localScale.y;
+        rotateNonStop = 0;
     }
     void FixedUpdate() {
         float posTargetDeviation = (posTargetSplitBar - toVector2(SplitBar.transform.position)).magnitude;
@@ -70,6 +73,10 @@ public class SplitBarController : MonoBehaviour {
         } else {
             rbSplitBar.transform.localScale = new Vector3(SplitBar.transform.localScale.x, rbSplitBar.transform.localScale.y * (scaleTargetSplitBar < rbSplitBar.transform.localScale.y ? 1 - SplitBarScaleSpeed : 1 + SplitBarScaleSpeed), SplitBar.transform.localScale.z);
         }
+
+        if (rotateNonStop != 0) {
+            rotTargetSplitBar = angleClamp1(angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z) + rotateNonStop);
+        }
     }
 
     public void SetSplitBarMoveSpeed(float a) { SplitBarMoveSpeed = a; }
@@ -79,5 +86,6 @@ public class SplitBarController : MonoBehaviour {
     public void MoveSplitBarX(float x) { posTargetSplitBar.x += x; }
     public void MoveSplitBarY(float y) { posTargetSplitBar.y += y; }
     public void RotateSplitBar(float degrees) { rotTargetSplitBar = angleClamp1(rotTargetSplitBar + degrees); }
+    public void RotateNonStop(float a) { rotateNonStop = a; }
     public void StretchSplitBar(float scale) { scaleTargetSplitBar *= scale; }
 }
