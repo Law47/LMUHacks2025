@@ -23,14 +23,30 @@ public class GameManager : MonoBehaviour {
     Vector3 toVector3(Vector2 a) {
         return new Vector3(a.x, a.y, 0f);
     }
-    float angularClamp(float a) {
-        float b = a;
-        while (b > 180) { b -= 180; }
-        while (b < -180) { b += 180; }
-        return b;
+    float angleClamp1(float a) {
+        while (a > 360f) {
+            a -= 360f;
+        }
+        while (a < -360f) {
+            a += 360f;
+        }
+        return a;
+    }
+    float angularClamp2(float a) {
+        if (a > 180) { return -(360 - a); }
+        else if (a < -180) { return 360 + a; }
+        return a;
     }
     float getAngleDistance(float a, float b) {
-        return Mathf.Abs(a - b);
+        a = a < 0 ? a + 360: a;
+        b = b < 0 ? b + 360: b;
+        float d = a - b;
+        if (d < -180) {
+            d += 360;
+        } else if (d > 180) {
+            d -= 360;
+        }
+        return Mathf.Abs(d);
     }
 
     void Awake() {
@@ -44,14 +60,14 @@ public class GameManager : MonoBehaviour {
         if (posTargetDeviation <= PosAutoMergeDistance) {
             SplitBar.transform.position = toVector3(posTargetSplitBar);
         } else {
-            rbSplitBar.linearVelocity = (posTargetSplitBar - toVector2(SplitBar.transform.position)).normalized * SplitBarMoveSpeed;
+            SplitBar.transform.position += toVector3((posTargetSplitBar - toVector2(SplitBar.transform.position)).normalized * SplitBarMoveSpeed);
         }
         float rotTargetDeviation = getAngleDistance(rotTargetSplitBar, SplitBar.transform.rotation.eulerAngles.z);
         if (rotTargetDeviation <= RotAutoMergeDistance) {
-            SplitBar.transform.rotation = Quaternion.Euler(new Vector3(0f, rotTargetSplitBar, 0f));
+            SplitBar.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, rotTargetSplitBar));
         } else {
-            rbSplitBar.angularVelocity = rotTargetSplitBar < angularClamp(rbSplitBar.transform.rotation.eulerAngles.z) ? -SplitBarRotationSpeed : SplitBarRotationSpeed;
-            Debug.Log($"Actual: {rbSplitBar.angularVelocity},   Expected: {(rotTargetSplitBar < angularClamp(rbSplitBar.transform.rotation.eulerAngles.z) ? SplitBarRotationSpeed : -SplitBarRotationSpeed)}");
+            SplitBar.transform.rotation = Quaternion.Euler(SplitBar.transform.rotation.eulerAngles + new Vector3(0f, 0f, rotTargetSplitBar < angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z) ? -SplitBarRotationSpeed : SplitBarRotationSpeed));
+            Debug.Log($"Actual: {rbSplitBar.angularVelocity},   Expected: {(rotTargetSplitBar < angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z) ? SplitBarRotationSpeed : -SplitBarRotationSpeed)}");
         }
         float scaleTargetDeviation = Mathf.Abs(scaleTargetSplitBar - SplitBar.transform.localScale.y);
         if (scaleTargetDeviation <= ScaleAutoMergeDistance) {
@@ -59,7 +75,7 @@ public class GameManager : MonoBehaviour {
         } else {
             rbSplitBar.transform.localScale = new Vector3(SplitBar.transform.localScale.x, rbSplitBar.transform.localScale.y * (scaleTargetSplitBar < rbSplitBar.transform.localScale.y ? 1 - SplitBarScaleSpeed : 1 + SplitBarScaleSpeed), SplitBar.transform.localScale.z);
         }
-        Debug.Log($"Angle: {angularClamp(rbSplitBar.transform.rotation.eulerAngles.z)},   Target Angle: {rotTargetSplitBar}");
+        Debug.Log($"Angle: {rbSplitBar.transform.rotation.eulerAngles.z}   ,Clamped Angle: {angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z)},   Target Angle: {rotTargetSplitBar}");
         Debug.Log($"Deviations: [{posTargetDeviation}, {rotTargetDeviation}, {scaleTargetDeviation}]");
     }
 
@@ -69,6 +85,6 @@ public class GameManager : MonoBehaviour {
 
     public void MoveSplitBarX(float x) { posTargetSplitBar.x += x; }
     public void MoveSplitBarY(float y) { posTargetSplitBar.y += y; }
-    public void RotateSplitBar(float degrees) { rotTargetSplitBar += degrees; }
+    public void RotateSplitBar(float degrees) { rotTargetSplitBar = angleClamp1(rotTargetSplitBar + degrees); }
     public void StretchSplitBar(float scale) { scaleTargetSplitBar *= scale; }
 }
