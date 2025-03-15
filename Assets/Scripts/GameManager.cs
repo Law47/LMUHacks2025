@@ -2,20 +2,36 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     public GameObject splitBar;
-
-    public void MoveSplitBar(Vector2 transformation) {
-        splitBar.transform.position += new Vector3(transformation.x, transformation.y, 0);
-    }
-
-    public void RotateSplitBar(float degrees) {
-        splitBar.transform.rotation = Quaternion.Euler(new Vector3(0, 0, degrees));
+    private Rigidbody2D rbSplitBar;
+    
+    private Vector2 posTargetSplitBar;
+    private float rotTargetSplitBar;
+    private float scaleTargetSplitBar;
+    
+    Vector2 toVector2(Vector3 a) {
+        return new Vector2(a.x, a.y);
     }
 
     void Awake() {
-        
+        rbSplitBar = splitBar.GetComponent<Rigidbody2D>();
+        posTargetSplitBar = toVector2(splitBar.transform.position);
+        rotTargetSplitBar = splitBar.transform.rotation.eulerAngles.z;
+        scaleTargetSplitBar = splitBar.transform.localScale.y;
+    }
+    void FixedUpdate() {
+        float posTargetDeviation = (posTargetSplitBar - toVector2(splitBar.transform.position)).magnitude;
     }
 
-    void Update() {
-        
+    public void MoveSplitBarX(float x) {
+        posTargetSplitBar.x += x;
+    }
+    public void MoveSplitBarY(float y) {
+        posTargetSplitBar.y += y;
+    }
+    public void RotateSplitBar(float degrees) {
+        rotTargetSplitBar += degrees;
+    }
+    public void StretchSplitBar(float scale) {
+        scaleTargetSplitBar *= scale;
     }
 }
