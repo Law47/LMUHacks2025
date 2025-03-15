@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
 
     private Rigidbody2D rb;
+    private Animator anim;
+    private SpriteRenderer spr;
 
     void Start()
     {
+        spr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         if (rb == null)
         {
             Debug.LogError("Rigidbody2D component is missing from this game object.");
@@ -30,10 +34,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(moveLeftKey))
         {
             moveDirection = -1f;
+            anim.SetBool("walking", true);
+            spr.flipX = true;
         }
         else if (Input.GetKey(moveRightKey))
         {
             moveDirection = 1f;
+            anim.SetBool("walking", true);
+            spr.flipX = false;
+        }
+        else
+        {
+            anim.SetBool("walking", false);
         }
 
         rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
