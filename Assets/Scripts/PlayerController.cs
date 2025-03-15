@@ -38,4 +38,16 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
     }
+
+    public void SetMovementKeys(KeyCode newLeftKey, KeyCode newRightKey)
+    {
+        if (newLeftKey != KeyCode.None)
+        {
+            moveLeftKey = newLeftKey;
+        }
+        if (newRightKey != KeyCode.None)
+        {
+            moveRightKey = newRightKey;
+        }
+    }
 }
