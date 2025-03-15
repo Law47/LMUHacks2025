@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class SplitBarController : MonoBehaviour {
     [Header("GameObject Refs")]
     public GameObject SplitBar;
     
@@ -24,12 +24,8 @@ public class GameManager : MonoBehaviour {
         return new Vector3(a.x, a.y, 0f);
     }
     float angleClamp1(float a) {
-        while (a > 360f) {
-            a -= 360f;
-        }
-        while (a < -360f) {
-            a += 360f;
-        }
+        while (a > 360f) { a -= 360f; }
+        while (a < -360f) { a += 360f; }
         return a;
     }
     float angularClamp2(float a) {
