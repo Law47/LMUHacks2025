@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ControlChanger : MonoBehaviour
 {
-    [Header("New Control Settings")]
     public KeyCode newMoveLeftKey;
     public KeyCode newMoveRightKey;
 
