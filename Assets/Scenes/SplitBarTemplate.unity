@@ -635,6 +635,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SplitBar
       objectReference: {fileID: 0}
+    - target: {fileID: 5777360980034359773, guid: 7327c7e29eb3e6746986bec0dfed8c8c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
