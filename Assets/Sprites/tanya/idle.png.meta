@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 7d21c4e6950c1fc49bc4eeaed9e0c857
+=======
+guid: 6cf93d48de71e2b4e85385ce77a81983
+>>>>>>> 6ba57956c2b36e2f89a80c86b8d272b539927ebf
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -51,7 +55,11 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   spritePixelsToUnits: 400
+=======
+  spritePixelsToUnits: 100
+>>>>>>> 6ba57956c2b36e2f89a80c86b8d272b539927ebf
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,8 +142,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
+<<<<<<< HEAD
     nameFileIdTable:
       idle_0: 8793639957104055765
+=======
+    nameFileIdTable: {}
+>>>>>>> 6ba57956c2b36e2f89a80c86b8d272b539927ebf
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

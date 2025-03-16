@@ -9,7 +9,10 @@ public class ButtonSpriteChanger : MonoBehaviour
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            
+            if (!pressed) {
+                gameObject.GetComponent<SpriteRenderer>().sprite = PressedSprite; 
+                pressed = true;
+            }
         }
     }
 }
