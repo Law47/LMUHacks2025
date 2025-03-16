@@ -233,7 +233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 128451365122023481, guid: 333a68ac239dce146b444d9fa1eeea55, type: 3}
       propertyPath: newMoveLeftKey
-      value: 113
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 574774459047126768, guid: 333a68ac239dce146b444d9fa1eeea55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1334,7 +1334,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 128451365122023481, guid: 333a68ac239dce146b444d9fa1eeea55, type: 3}
       propertyPath: newMoveLeftKey
-      value: 113
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 128451365122023481, guid: 333a68ac239dce146b444d9fa1eeea55, type: 3}
+      propertyPath: newMoveRightKey
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 574774459047126768, guid: 333a68ac239dce146b444d9fa1eeea55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1739,11 +1743,11 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: 2838ec34104f70b42a21e272cde8b844, type: 2}
     - target: {fileID: 5369182795270096303, guid: d059cb29286a04e48a20f278c52f4bd3, type: 3}
       propertyPath: moveLeftKey
-      value: 106
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 5369182795270096303, guid: d059cb29286a04e48a20f278c52f4bd3, type: 3}
       propertyPath: moveRightKey
-      value: 108
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 6000876438076397598, guid: d059cb29286a04e48a20f278c52f4bd3, type: 3}
       propertyPath: m_LocalPosition.x
