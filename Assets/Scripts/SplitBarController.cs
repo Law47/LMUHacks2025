@@ -11,7 +11,6 @@ public class SplitBarController : MonoBehaviour {
     public float SplitBarMoveSpeed;
     public float SplitBarRotationSpeed;
     public float SplitBarScaleSpeed;
-    private Rigidbody2D rbSplitBar;
     
     private Vector2 posTargetSplitBar;
     private float rotTargetSplitBar;
@@ -48,7 +47,6 @@ public class SplitBarController : MonoBehaviour {
     }
 
     void Awake() {
-        rbSplitBar = SplitBar.GetComponent<Rigidbody2D>();
         posTargetSplitBar = toVector2(SplitBar.transform.position);
         rotTargetSplitBar = SplitBar.transform.rotation.eulerAngles.z;
         scaleTargetSplitBar = SplitBar.transform.localScale.y;
@@ -65,18 +63,19 @@ public class SplitBarController : MonoBehaviour {
         if (rotTargetDeviation <= RotAutoMergeDistance) {
             SplitBar.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, rotTargetSplitBar));
         } else {
-            SplitBar.transform.rotation = Quaternion.Euler(SplitBar.transform.rotation.eulerAngles + new Vector3(0f, 0f, getAngleDistance(angularClamp2(rotTargetSplitBar), angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z)) < 0 ? -SplitBarRotationSpeed : SplitBarRotationSpeed));
+            SplitBar.transform.rotation = Quaternion.Euler(SplitBar.transform.rotation.eulerAngles + new Vector3(0f, 0f, getAngleDistance(angularClamp2(rotTargetSplitBar), angularClamp2(SplitBar.transform.rotation.eulerAngles.z)) < 0 ? -SplitBarRotationSpeed : SplitBarRotationSpeed));
         }
         float scaleTargetDeviation = Mathf.Abs(scaleTargetSplitBar - SplitBar.transform.localScale.y);
         if (scaleTargetDeviation <= ScaleAutoMergeDistance) {
             SplitBar.transform.localScale = new Vector3(SplitBar.transform.localScale.x, scaleTargetSplitBar, SplitBar.transform.localScale.z);
         } else {
-            rbSplitBar.transform.localScale = new Vector3(SplitBar.transform.localScale.x, rbSplitBar.transform.localScale.y * (scaleTargetSplitBar < rbSplitBar.transform.localScale.y ? 1 - SplitBarScaleSpeed : 1 + SplitBarScaleSpeed), SplitBar.transform.localScale.z);
+            SplitBar.transform.localScale = new Vector3(SplitBar.transform.localScale.x, SplitBar.transform.localScale.y * (scaleTargetSplitBar < SplitBar.transform.localScale.y ? 1 - SplitBarScaleSpeed : 1 + SplitBarScaleSpeed), SplitBar.transform.localScale.z);
         }
 
         if (rotateNonStop != 0) {
-            rotTargetSplitBar = angleClamp1(angularClamp2(rbSplitBar.transform.rotation.eulerAngles.z) + rotateNonStop);
+            rotTargetSplitBar = angleClamp1(angularClamp2(SplitBar.transform.rotation.eulerAngles.z) + rotateNonStop);
         }
+        Debug.Log($"thingy: {(posTargetSplitBar - toVector2(SplitBar.transform.position))}, thingyasdasd: {toVector3((posTargetSplitBar - toVector2(SplitBar.transform.position)).normalized * SplitBarMoveSpeed)}, thigntwo: {posTargetSplitBar}");
     }
 
     public void SetSplitBarMoveSpeed(float a) { SplitBarMoveSpeed = a; }
@@ -88,5 +87,5 @@ public class SplitBarController : MonoBehaviour {
     public void RotateSplitBar(float degrees) { rotTargetSplitBar = angleClamp1(rotTargetSplitBar + degrees); }
     public void RotateNonStop(float a) { rotateNonStop = a; }
     public void StretchSplitBar(float scale) { scaleTargetSplitBar *= scale; }
-    public void TeleportSplitBar(Vector2 a) { SplitBar.transform.localPosition = toVector3(a); }
+    public void TeleportSplitBar(Vector2 a) { SplitBar.transform.localPosition = new Vector3(a.x, a.y, 0f); }
 }
