@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer spr;
+
+    public UnityEvent walkingRight;
+    public UnityEvent walkingLeft;
+    public UnityEvent notWalking;
 
     void Start()
     {
@@ -36,16 +41,19 @@ public class PlayerController : MonoBehaviour
             moveDirection = -1f;
             anim.SetBool("walking", true);
             spr.flipX = true;
+            walkingLeft.Invoke();
         }
         else if (Input.GetKey(moveRightKey))
         {
             moveDirection = 1f;
             anim.SetBool("walking", true);
             spr.flipX = false;
+            walkingRight.Invoke();
         }
         else
         {
             anim.SetBool("walking", false);
+            notWalking.Invoke();
         }
 
         rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
