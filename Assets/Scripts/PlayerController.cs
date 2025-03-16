@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public UnityEvent walkingRight;
     public UnityEvent walkingLeft;
     public UnityEvent notWalking;
+    public UnityEvent changeKeys;
+    public GameObject changeKeyColliderObj;
 
     void Start()
     {
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveDirection * moveSpeed, rb.linearVelocity.y);
     }
 
-    public void SetMovementKeys(KeyCode newLeftKey, KeyCode newRightKey)
+    public void SetMovementKeys(KeyCode newLeftKey, KeyCode newRightKey, GameObject buttonObject)
     {
         if (newLeftKey != KeyCode.None)
         {
@@ -69,5 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             moveRightKey = newRightKey;
         }
+        changeKeyColliderObj = buttonObject;
+        changeKeys.Invoke();
     }
 }
