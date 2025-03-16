@@ -80,6 +80,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
+            if (SceneManager.GetActiveScene().name == "Level7")
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
