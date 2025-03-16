@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Set : MonoBehaviour
+public class DeactivateObj : MonoBehaviour
 {
     public GameObject[] toDeactivate;
     private void OnTriggerEnter2D(Collider2D collision)
