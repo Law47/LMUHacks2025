@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public KeyCode moveLeftKey = KeyCode.A;
     public KeyCode moveRightKey = KeyCode.D;
+    public KeyCode restartKey = KeyCode.F1;
     public float moveSpeed = 5f;
 
     private Rigidbody2D rb;
@@ -53,7 +54,10 @@ public class PlayerController : MonoBehaviour
             spr.flipX = false;
             walkingRight.Invoke();
         }
-        else
+        else if (Input.GetKey(restartKey)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else 
         {
             anim.SetBool("walking", false);
             notWalking.Invoke();
