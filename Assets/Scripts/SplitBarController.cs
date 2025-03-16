@@ -88,4 +88,5 @@ public class SplitBarController : MonoBehaviour {
     public void RotateSplitBar(float degrees) { rotTargetSplitBar = angleClamp1(rotTargetSplitBar + degrees); }
     public void RotateNonStop(float a) { rotateNonStop = a; }
     public void StretchSplitBar(float scale) { scaleTargetSplitBar *= scale; }
+    public void TeleportSplitBar(Vector2 a) { SplitBar.transform.localPosition = toVector3(a); }
 }
