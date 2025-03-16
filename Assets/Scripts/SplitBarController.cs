@@ -75,7 +75,6 @@ public class SplitBarController : MonoBehaviour {
         if (rotateNonStop != 0) {
             rotTargetSplitBar = angleClamp1(angularClamp2(SplitBar.transform.rotation.eulerAngles.z) + rotateNonStop);
         }
-        Debug.Log($"thingy: {(posTargetSplitBar - toVector2(SplitBar.transform.position))}, thingyasdasd: {toVector3((posTargetSplitBar - toVector2(SplitBar.transform.position)).normalized * SplitBarMoveSpeed)}, thigntwo: {posTargetSplitBar}");
     }
 
     public void SetSplitBarMoveSpeed(float a) { SplitBarMoveSpeed = a; }
