@@ -60,6 +60,10 @@ MonoBehaviour:
   notWalking:
     m_PersistentCalls:
       m_Calls: []
+  changeKeys:
+    m_PersistentCalls:
+      m_Calls: []
+  changeKeyColliderObj: {fileID: 0}
 --- !u!212 &5360140518976056015
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -104,7 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2690792559708188323, guid: 3465ed0622adce244beeab9f858a190a, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: 7d21c4e6950c1fc49bc4eeaed9e0c857, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 1973864256131675669}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 824bae5380c4df04cb48bf4821d221c2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6955fcd41c34a1049a5d11dfb94596f9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
