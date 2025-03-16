@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class ControlChanger : MonoBehaviour
+public class ButtonSpriteChanger : MonoBehaviour
 {
-    public KeyCode newMoveLeftKey;
-    public KeyCode newMoveRightKey;
-
+    public Sprite PressedSprite;
+    private bool pressed = false;
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            playerController.SetMovementKeys(newMoveLeftKey, newMoveRightKey, gameObject);
+            
         }
     }
 }
